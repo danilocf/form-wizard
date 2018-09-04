@@ -1,14 +1,14 @@
 <template>
-  <my-form/>
+  <my-register/>
 </template>
 
 <script>
-import MyForm from '@/components/MyForm.vue';
+import MyRegister from '@/components/MyRegister.vue';
 
 export default {
   name: 'home',
   components: {
-    MyForm
+    MyRegister
   }
 }
 </script>
