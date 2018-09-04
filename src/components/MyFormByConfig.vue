@@ -4,6 +4,8 @@
     @submit.prevent="submit"
     >
 
+    <pre>{{ form }}</pre>
+
     <template
       v-for="conf in configForm"
       >
@@ -45,17 +47,17 @@ export default {
       form: {} // auto filled
     }
   },
-  beforeMount() {
+  created() {
     this.generateForm()
   },
   methods: {
     generateForm() {
       this.configForm.forEach(conf => {
         const model = conf.model
-        this.form[model] = null
+        this.$set(this.form, model, null)
       })
     },
-    
+
     submit() {
       console.log('submit')
     }
