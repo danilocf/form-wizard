@@ -1,7 +1,7 @@
 <template>
   <my-form @submit="submit">
 
-    <pre>{{ form }}</pre>
+    <pre>{{ form }}</pre><hr>
 
     <template
       v-for="conf in configForm"
@@ -13,6 +13,7 @@
         :id="conf.id"
         :label="conf.label"
         :key="conf.id"
+        :error="errors[conf.model]"
         />
     </template>
 
@@ -41,9 +42,16 @@ export default {
           id: 'email',
           label: 'Email',
           type: 'email'
+        },
+        {
+          model: 'cellphone',
+          id: 'cellphone',
+          label: 'Cellphone'
         }
       ],
-      form: {} // auto filled
+      // auto filled
+      form: {},
+      errors: {}
     }
   },
   created() {
@@ -54,6 +62,7 @@ export default {
       this.configForm.forEach(conf => {
         const model = conf.model
         this.$set(this.form, model, null)
+        this.$set(this.errors, model, {})
       })
     },
 
