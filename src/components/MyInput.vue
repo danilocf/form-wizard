@@ -43,6 +43,11 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    error: {
+      type: Object,
+      required: false,
+      default() { return {} }
     }
   }
 }
