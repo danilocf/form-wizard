@@ -1,8 +1,5 @@
 <template>
-  <form 
-    class="my-form" 
-    @submit.prevent="submit"
-    >
+  <my-form @submit="submit">
 
     <pre>{{ form }}</pre>
 
@@ -19,14 +16,16 @@
         />
     </template>
 
-  </form>
+  </my-form>
 </template>
 
 <script>
+import MyForm from '@/components/MyForm'
 import MyInput from '@/components/MyInput'
 
 export default {
   components: {
+    MyForm,
     MyInput
   },
   data() {
@@ -59,12 +58,8 @@ export default {
     },
 
     submit() {
-      console.log('submit')
+      console.log(JSON.stringify(this.form, null, '\t'))
     }
   }
 }
 </script>
-
-<style>
-
-</style>
