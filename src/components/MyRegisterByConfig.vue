@@ -4,7 +4,7 @@
     <pre>{{ form }}</pre><hr>
 
     <template
-      v-for="conf in configForm"
+      v-for="conf in formConfig"
       >
       {{ conf }}
       <my-input
@@ -14,6 +14,7 @@
         :label="conf.label"
         :key="conf.id"
         :error="errors[conf.model]"
+        :max="conf.max || 50"
         />
     </template>
 
@@ -23,6 +24,7 @@
 <script>
 import MyForm from '@/components/MyForm'
 import MyInput from '@/components/MyInput'
+import config from './config.json'
 
 export default {
   components: {
@@ -31,24 +33,7 @@ export default {
   },
   data() {
     return {
-      configForm: [
-        {
-          model: 'username',
-          id: 'username',
-          label: 'Username'
-        },
-        {
-          model: 'email',
-          id: 'email',
-          label: 'Email',
-          type: 'email'
-        },
-        {
-          model: 'cellphone',
-          id: 'cellphone',
-          label: 'Cellphone'
-        }
-      ],
+      formConfig: config,
       // auto filled
       form: {},
       errors: {}
@@ -59,7 +44,7 @@ export default {
   },
   methods: {
     generateForm() {
-      this.configForm.forEach(conf => {
+      this.formConfig.forEach(conf => {
         const model = conf.model
         this.$set(this.form, model, null)
         this.$set(this.errors, model, {})
