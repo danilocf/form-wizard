@@ -6,6 +6,7 @@
       class="my-input__label"
       >
       {{ label }}:
+      <small>{{ value && value.length }}</small>
     </label>
     <input
       :type="type"
@@ -14,6 +15,7 @@
       :value="value"
       @input="$emit('change', $event.target.value)"
       :required="!notRequired"
+      :maxlength="max"
       >
   </div>
 </template>
@@ -48,6 +50,11 @@ export default {
       type: Object,
       required: false,
       default() { return {} }
+    },
+    max: {
+      type: [String, Number],
+      required: false,
+      default: 50
     }
   }
 }
