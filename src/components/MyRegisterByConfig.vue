@@ -1,24 +1,30 @@
 <template>
-  <my-form @submit="submit">
+  <div class="container">
 
-    <pre>{{ form }}</pre><hr>
+    <div
+      v-for="(step, index) in formConfig.steps"
+      :key="index"
+    >
+      <h1>{{ step.name }}</h1>
 
-    <template
-      v-for="conf in formConfig"
-      >
-      {{ conf }}
-      <my-input
-        v-model="form[conf.model]"
-        :type="conf.type || 'text'"
-        :id="conf.id"
-        :label="conf.label"
-        :key="conf.id"
-        :error="errors[conf.model]"
-        :max="conf.max || 50"
-        />
-    </template>
+      <template v-for="item in step.items">
+        <my-input
+          v-model="temp"
+          :type="item.type || 'text'"
+          :id="item.id"
+          :label="item.label"
+          :key="item.id"
+          :error="errors[item.model]"
+          :max="item.max || 100"
+          />
+      </template>
+    </div>
 
-  </my-form>
+    <!-- <pre>{{ form }}</pre><hr> -->
+
+    <!-- <my-form @submit="submit">
+    </my-form> -->
+  </div>
 </template>
 
 <script>
@@ -33,6 +39,8 @@ export default {
   },
   data() {
     return {
+      temp: null,
+
       formConfig: config,
       // auto filled
       form: {},
@@ -40,16 +48,16 @@ export default {
     }
   },
   created() {
-    this.generateForm()
+    // this.generateForm()
   },
   methods: {
-    generateForm() {
-      this.formConfig.forEach(conf => {
-        const model = conf.model
-        this.$set(this.form, model, null)
-        this.$set(this.errors, model, {})
-      })
-    },
+    // generateForm() {
+    //   this.formConfig.forEach(conf => {
+    //     const model = conf.model
+    //     this.$set(this.form, model, null)
+    //     this.$set(this.errors, model, {})
+    //   })
+    // },
 
     submit() {
       console.log(JSON.stringify(this.form, null, '\t'))
@@ -57,3 +65,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.container {
+  width: 600px;
+  margin: 16px auto;
+}
+</style>

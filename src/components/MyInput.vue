@@ -5,8 +5,7 @@
       :for="id"
       class="my-input__label"
       >
-      {{ label }}:
-      <small>{{ value && value.length }}</small>
+      <span v-if="label">{{ label }}:</span>
     </label>
     <input
       :type="type"
@@ -30,8 +29,7 @@ export default {
     value: String,
     type: {
       type: String,
-      required: false,
-      default: 'text'
+      required: true
     },
     id: {
       type: String,
@@ -53,8 +51,7 @@ export default {
     },
     max: {
       type: [String, Number],
-      required: false,
-      default: 50
+      required: true
     }
   }
 }

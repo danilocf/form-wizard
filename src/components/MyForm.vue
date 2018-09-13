@@ -16,12 +16,6 @@
   </form>
 </template>
 
-<script>
-export default {
-  name: 'my-form'
-}
-</script>
-
 <style lang="scss">
 .my-form {
   max-width: 600px;

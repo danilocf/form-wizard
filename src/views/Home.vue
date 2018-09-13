@@ -1,14 +1,14 @@
 <template>
-  <my-register/>
+  <my-register-by-config/>
 </template>
 
 <script>
-import MyRegister from '@/components/MyRegister.vue';
+import MyRegisterByConfig from '../components/MyRegisterByConfig'
 
 export default {
-  name: 'home',
   components: {
-    MyRegister
+    MyRegisterByConfig
   }
 }
 </script>
+ 

@@ -4,7 +4,7 @@
   },
   "steps": [
     {
-      "name": "Login infos",
+      "name": "Login infos", 
       "items": [
         {
           "model": "email",
