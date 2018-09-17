@@ -1,29 +1,31 @@
 <template>
   <div class="container">
 
-    <div
-      v-for="(step, index) in formConfig.steps"
-      :key="index"
-    >
-      <h1>{{ step.name }}</h1>
+    <my-form @submit="submit">
+      <pre>{{ form }}</pre><hr>
 
-      <template v-for="item in step.items">
-        <my-input
-          v-model="temp"
-          :type="item.type || 'text'"
-          :id="item.id"
-          :label="item.label"
-          :key="item.id"
-          :error="errors[item.model]"
-          :max="item.max || 100"
-          />
-      </template>
-    </div>
+      <!-- STEP -->
+      <div
+        v-for="(step, index) in formConfig.steps"
+        :key="index"
+      >
+        <h1>{{ step.name }}</h1>
 
-    <!-- <pre>{{ form }}</pre><hr> -->
-
-    <!-- <my-form @submit="submit">
-    </my-form> -->
+        <!-- STEP'S ITEM -->
+        <template v-for="item in step.items">
+          <my-input
+            v-model="form[item.model]"
+            :type="item.type || 'text'"
+            :id="item.id"
+            :label="item.label"
+            :key="item.id"
+            :error="errors[item.model]"
+            :max="item.max || 100"
+            />
+        </template>
+      </div>
+    </my-form>
+    
   </div>
 </template>
 
@@ -48,16 +50,21 @@ export default {
     }
   },
   created() {
-    // this.generateForm()
+    this.generateForm()
   },
   methods: {
-    // generateForm() {
-    //   this.formConfig.forEach(conf => {
-    //     const model = conf.model
-    //     this.$set(this.form, model, null)
-    //     this.$set(this.errors, model, {})
-    //   })
-    // },
+    generateForm() {
+      this.form = {}
+      this.errors = {}
+
+      this.formConfig.steps.forEach(step => {
+        step.items.forEach(item => {
+          const model = item.model
+          this.$set(this.form, model, null)
+          this.$set(this.errors, model, {})
+        })
+      })
+    },
 
     submit() {
       console.log(JSON.stringify(this.form, null, '\t'))
@@ -65,10 +72,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.container {
-  width: 600px;
-  margin: 16px auto;
-}
-</style>
