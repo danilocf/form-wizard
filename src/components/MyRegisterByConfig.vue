@@ -25,7 +25,7 @@
         </template>
       </div>
     </my-form>
-    
+
   </div>
 </template>
 
