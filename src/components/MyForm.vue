@@ -2,14 +2,14 @@
   <form
     class="my-form"
     @submit.prevent="validate"
-    >
+  >
 
     <slot/>
 
     <button
       type="submit"
       class="my-form__submit"
-      >
+    >
       Submit
     </button>
 

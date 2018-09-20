@@ -2,28 +2,28 @@
   <div class="about">
     <h1>This is an about page</h1>
     <input
-      type="text"
       v-mask="'money'"
       v-validate="'required'"
+      type="text"
       name="money"
       class="my-input"
-      >
+    >
     <p>{{ errors.first('money') }}</p>
 
     <input
-      type="text"
       v-mask="'999.999.999-99'"
       v-validate="'required'"
+      type="text"
       name="cpf"
       class="my-input"
-      >
+    >
     <p>{{ errors.first('cpf') }}</p>
 
     <input
-      type="email"
       v-validate="'required|email'"
+      type="email"
       name="email"
-      >
+    >
     <p>{{ errors.first('email') }}</p>
 
     <test-input/>
