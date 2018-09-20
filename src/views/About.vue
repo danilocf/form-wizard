@@ -26,16 +26,22 @@
       >
     <p>{{ errors.first('email') }}</p>
 
-    <button @click.prevent="submit">submit</button>
+    <test-input/>
+
+    <button @click.prevent="submit">SUBMIT</button>
   </div>
 </template>
 
 <script>
 import AwesomeMask from 'awesome-mask'
+import TestInput from '@/components/TestInput'
 
 export default {
   directives: {
     'mask': AwesomeMask
+  },
+  components: {
+    TestInput
   },
   data() {
     return {
@@ -50,19 +56,27 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-input,
-button,
-p {
-  width: 100%;
+<style lang="scss">
+.about {
   padding: 24px;
-  font-size: 24px;
-  margin: 16px 0;
-}
 
-p {
-  margin: 0;
-  padding: 0;
-  color: red;
+  * {
+    box-sizing: border-box;
+  }
+
+  input,
+  button,
+  p {
+    width: 100%;
+    padding: 24px;
+    font-size: 24px;
+    margin: 16px 0;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    color: red;
+  }
 }
 </style>
