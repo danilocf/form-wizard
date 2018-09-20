@@ -13,14 +13,17 @@
 
         <!-- STEP'S ITEM -->
         <template v-for="item in step.items">
+          <!-- <p>{{ item }}</p> -->
           <my-input
+            :key="item.id"
             v-model="form[item.model]"
             :type="item.type || 'text'"
             :id="item.id"
             :label="item.label"
-            :key="item.id"
             :error="errors[item.model]"
             :max="item.max || 100"
+            :mask="item.mask || ''"
+            :rules="item.rules || ''"
             />
         </template>
       </div>

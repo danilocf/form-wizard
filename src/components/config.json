@@ -10,13 +10,15 @@
           "model": "email",
           "id": "email",
           "label": "Email",
-          "type": "email"
+          "type": "email",
+          "rules": "required|email"
         },
         {
           "model": "password",
           "id": "password",
           "label": "Password",
-          "type": "password"
+          "type": "password",
+          "rules": "required"
         }
       ]
     },
@@ -26,7 +28,9 @@
         {
           "model": "cellphone",
           "id": "cellphone",
-          "label": "Cellphone"
+          "label": "Cellphone",
+          "rules": "required",
+          "mask": "(99)99999-9999"
         },
         {
           "model": "lala",

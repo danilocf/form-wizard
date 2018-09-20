@@ -1,12 +1,12 @@
 <template>
   <form
-    class="my-form" 
-    @submit.prevent="$emit('submit')"
+    class="my-form"
+    @submit.prevent="validate"
     >
 
     <slot/>
 
-    <button 
+    <button
       type="submit"
       class="my-form__submit"
       >
@@ -30,3 +30,17 @@
   margin: 1.5rem 0;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    validate() {
+      this.$validator.validate().then(result => {
+        if (result) {
+          this.$emit('submit')
+        }
+      })
+    }
+  }
+}
+</script>
