@@ -1,17 +1,32 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <input 
-      type="text" 
+    <input
+      type="text"
       v-mask="'money'"
+      v-validate="'required'"
+      name="money"
       class="my-input"
       >
+    <p>{{ errors.first('money') }}</p>
 
-    <input 
-      type="text" 
+    <input
+      type="text"
       v-mask="'999.999.999-99'"
+      v-validate="'required'"
+      name="cpf"
       class="my-input"
       >
+    <p>{{ errors.first('cpf') }}</p>
+
+    <input
+      type="email"
+      v-validate="'required|email'"
+      name="email"
+      >
+    <p>{{ errors.first('email') }}</p>
+
+    <button @click.prevent="submit">submit</button>
   </div>
 </template>
 
@@ -26,6 +41,28 @@ export default {
     return {
       value: 0
     }
+  },
+  methods: {
+    submit() {
+      this.$validator.validate()
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+input,
+button,
+p {
+  width: 100%;
+  padding: 24px;
+  font-size: 24px;
+  margin: 16px 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  color: red;
+}
+</style>
