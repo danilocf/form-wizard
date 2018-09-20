@@ -2,6 +2,7 @@
   <div>
     <input
       type="text"
+      v-model="text"
       v-validate="'required'"
       name="text"
       >
@@ -11,6 +12,12 @@
 
 <script>
 export default {
-  props: []
+  inject: ['$validator'],
+  props: [],
+  data() {
+    return {
+      text: null
+    }
+  }
 }
 </script>
