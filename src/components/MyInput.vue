@@ -27,6 +27,7 @@
 import AwesomeMask from 'awesome-mask'
 
 export default {
+  inject: ['$validator'],
   directives: {
     'mask': AwesomeMask
   },

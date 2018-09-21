@@ -50,7 +50,11 @@ export default {
   },
   methods: {
     submit() {
-      this.$validator.validate()
+      this.$validator.validate().then(result => {
+        if (result) {
+          console.log(JSON.stringify(this.$data, null, '\t'))
+        }
+      })
     }
   }
 }
