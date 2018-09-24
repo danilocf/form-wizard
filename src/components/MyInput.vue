@@ -4,21 +4,21 @@
       v-if="label"
       :for="id"
       class="my-input__label"
-      >
+    >
       <span v-if="label">{{ label }}:</span>
     </label>
     <input
+      v-mask="mask"
+      v-validate="rules"
       :type="type"
       :id="id"
       :name="id"
-      class="my-input"
       :value="value"
-      @input="$emit('change', $event.target.value)"
       :maxlength="max"
-      v-mask="mask"
-      v-validate="rules"
+      class="my-input"
       autocomplete="off"
-      >
+      @input="$emit('change', $event.target.value)"
+    >
     <p class="my-input_error">{{ errors.first(id) }}</p>
   </div>
 </template>

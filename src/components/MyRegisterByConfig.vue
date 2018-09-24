@@ -24,7 +24,7 @@
             :max="item.max || 100"
             :mask="item.mask || ''"
             :rules="item.rules || ''"
-            />
+          />
         </template>
       </div>
     </my-form>
