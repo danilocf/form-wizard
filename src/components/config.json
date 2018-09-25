@@ -26,10 +26,17 @@
       "name": "Other infos",
       "items": [
         {
+          "model": "cpf",
+          "id": "cpf",
+          "label": "CPF",
+          "rules": "required",
+          "mask": "999.999.999-99"
+        },
+        {
           "model": "cellphone",
           "id": "cellphone",
           "label": "Cellphone",
-          "rules": "required",
+          "rules": "required|min:14",
           "mask": "(99)99999-9999"
         },
         {
