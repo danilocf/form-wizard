@@ -20,7 +20,6 @@
             :type="item.type || 'text'"
             :id="item.id"
             :label="item.label"
-            :error="errors[item.model]"
             :max="item.max || 100"
             :mask="item.mask || ''"
             :rules="item.rules || ''"
@@ -48,8 +47,7 @@ export default {
 
       formConfig: config,
       // auto filled
-      form: {},
-      errors: {}
+      form: {}
     }
   },
   created() {
@@ -58,13 +56,11 @@ export default {
   methods: {
     generateForm() {
       this.form = {}
-      this.errors = {}
 
       this.formConfig.steps.forEach(step => {
         step.items.forEach(item => {
           const model = item.model
           this.$set(this.form, model, null)
-          this.$set(this.errors, model, {})
         })
       })
     },
