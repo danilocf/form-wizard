@@ -8,7 +8,11 @@
       v-for="(step, index) in formConfig.steps"
       :key="index"
     >
-      <my-form @submit="submit(index)">
+      <my-form
+        v-if="activeStep === index"
+        @submit="submit(index)"
+      >
+        <p>Step: {{ index+1 }} of {{ totalSteps }}</p>
         <h1>{{ step.name }}</h1>
 
         <!-- STEP'S ITEM -->
@@ -25,6 +29,7 @@
             :rules="item.rules || ''"
           />
         </template>
+
       </my-form>
     </div>
 
@@ -43,8 +48,8 @@ export default {
   },
   data() {
     return {
-      temp: null,
-
+      activeStep: 0,
+      totalSteps: null,
       formConfig: config,
       // auto filled
       form: {}
@@ -64,10 +69,16 @@ export default {
           this.$set(this.form[index], model, null)
         })
       })
+
+      this.totalSteps = this.formConfig.steps.length
     },
 
     submit(index) {
       console.log(JSON.stringify(this.form[index], null, '\t'))
+
+      if (index+1 < this.totalSteps) {
+        this.activeStep = index+1
+      }
     }
   }
 }
