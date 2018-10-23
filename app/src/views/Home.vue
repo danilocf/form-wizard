@@ -1,16 +1,13 @@
 <template>
-  <!-- <my-register-by-config/> -->
-  <my-register-with-steps-by-config/>
+  <my-register/>
 </template>
 
 <script>
-import MyRegisterByConfig from '../components/MyRegisterByConfig'
-import MyRegisterWithStepsByConfig from '../components/MyRegisterWithStepsByConfig'
+import MyRegister from '../components/MyRegister'
 
 export default {
   components: {
-    MyRegisterByConfig,
-    MyRegisterWithStepsByConfig
+    MyRegister
   }
 }
 </script>

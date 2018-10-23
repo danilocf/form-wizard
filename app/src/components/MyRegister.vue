@@ -40,6 +40,7 @@
 import MyForm from '@/components/MyForm'
 import MyInput from '@/components/MyInput'
 import config from './config.json'
+import Axios from 'axios'
 
 export default {
   components: {
@@ -59,6 +60,15 @@ export default {
     this.generateForm()
   },
   methods: {
+    getConfig() {
+      try {
+        const { data } = await
+
+      } catch (error) {
+        console.log('error', error)
+      }
+    },
+
     generateForm() {
       this.form = {}
 
