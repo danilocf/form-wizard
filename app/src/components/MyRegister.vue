@@ -39,7 +39,6 @@
 <script>
 import MyForm from '@/components/MyForm'
 import MyInput from '@/components/MyInput'
-import config from './config.json'
 import Axios from 'axios'
 
 export default {
@@ -51,7 +50,7 @@ export default {
     return {
       activeStep: 0,
       totalSteps: null,
-      formConfig: config,
+      formConfig: {},
       // auto filled
       form: {}
     }
@@ -60,16 +59,22 @@ export default {
     this.generateForm()
   },
   methods: {
-    getConfig() {
+    async getConfig() {
       try {
-        const { data } = await
+        const { data } = await Axios.get('http://localhost:3000/config')
+        console.log('data', JSON.stringify(data))
+        if (data && data.length) {
+          return data[0]
+        }
 
       } catch (error) {
         console.log('error', error)
+        return { steps: [] }
       }
     },
 
-    generateForm() {
+    async generateForm() {
+      this.formConfig = await this.getConfig()
       this.form = {}
 
       this.formConfig.steps.forEach((step, index) => {
