@@ -21,9 +21,13 @@ MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, (err
 // USER
 // * * * * * * * * *
 app.post('/user', (req, res) => {
+  // TODO: improve
   const user = {
-    name: req.body.name,
-    cpf: req.body.cpf
+    email: req.body.email,
+    password: req.body.password,
+    cpf: req.body.cpf,
+    cellphone: req.body.cellphone,
+    lala: req.body.lala,
   }
 
   db.collection('user').insertOne(user, (err, result) => {

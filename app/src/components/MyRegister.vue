@@ -88,11 +88,29 @@ export default {
       this.totalSteps = this.formConfig.steps.length
     },
 
-    submit(index) {
+    async submit(index) {
       console.log(JSON.stringify(this.form[index], null, '\t'))
 
       if (index+1 < this.totalSteps) {
         this.activeStep = index+1
+
+      } else {
+        // TODO: improve
+        const sendData = {
+          email: this.form[0].email,
+          password: this.form[0].password,
+          cpf: this.form[1].cpf,
+          cellphone: this.form[1].cellphone,
+          lala: this.form[1].lala,
+        }
+
+        try {
+          const { data } = await Axios.post('http://localhost:3000/user', sendData)
+          console.log('data', JSON.stringify(data))
+
+        } catch (error) {
+          console.log('error', error)
+        }
       }
     }
   }
