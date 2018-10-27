@@ -22,12 +22,16 @@ MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, (err
 // USER
 // * * * * * * * * *
 app.post('/user', (req, res) => {
-  const cpf = req.body.cpf && req.body.cpf.trim()
+  const data = req.body.map(i => i.trim())
+  const cpf = data.cpf && data.cpf.trim()
   if (!cpf) return res.status(400).send('cpf not found')
   if (!isCpf(cpf)) return res.status(400).send('cpf not valid')
 
-  db.collection('user').insertOne(req.body, (err, result) => {
-    if (err) throw err
+  db.collection('user').insertOne(data, (err, result) => {
+    if (err) {
+      console.log('err', err)
+      return res.status(400)
+    }
     console.log('user added succesfully', result.ops)
     res.send('user added succesfully')
   })
@@ -35,7 +39,10 @@ app.post('/user', (req, res) => {
 
 app.get('/user', (req, res) => {
   db.collection('user').find({}).toArray((err, result) => {
-    if (err) throw err
+    if (err) {
+      console.log('err', err)
+      return res.status(400)
+    }
     console.log('user', JSON.stringify(result))
     res.send(result)
   })
@@ -46,17 +53,27 @@ app.get('/user/:id', (req, res) => {
   const query = { '_id': ObjectID(id) }
 
   db.collection('user').find(query).toArray((err, result) => {
-    if (err) throw err
+    if (err) {
+      console.log('err', err)
+      return res.status(400)
+    }
     console.log('user', JSON.stringify(result))
     res.send(result)
   })
 })
 
 app.put('/user/:id', (req, res) => {
+  const data = req.body.map(i => i.trim())
+  const cpf = data.cpf && data.cpf.trim()
+  if (!cpf) return res.status(400).send('cpf not found')
+  if (!isCpf(cpf)) return res.status(400).send('cpf not valid')
   const id = ObjectID(req.params.id)
 
-  db.collection('user').updateOne({ '_id': id }, { '$set': req.body }, (err, result) => {
-    if (err) throw err
+  db.collection('user').updateOne({ '_id': id }, { '$set': data }, (err, result) => {
+    if (err) {
+      console.log('err', err)
+      return res.status(400)
+    }
     console.log('user updated succesfully')
     res.send('user updated succesfully')
   })
@@ -66,7 +83,10 @@ app.delete('/user/:id', (req, res) => {
   const id = ObjectID(req.params.id)
 
   db.collection('user').deleteOne({ '_id': id }, (err, result) => {
-    if (err) throw err
+    if (err) {
+      console.log('err', err)
+      return res.status(400)
+    }
     console.log('user deleted succesfully')
     res.send('user deleted succesfully')
   })
@@ -77,7 +97,10 @@ app.delete('/user/:id', (req, res) => {
 // * * * * * * * * *
 app.get('/config', (req, res) => {
   db.collection('form').find({}).toArray((err, result) => {
-    if (err) throw err
+    if (err) {
+      console.log('err', err)
+      return res.status(400)
+    }
     res.send(result)
   })
 })
