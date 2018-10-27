@@ -5,6 +5,7 @@ const app = express()
 const port = 3000
 const MongoClient = require('mongodb').MongoClient
 const ObjectID = require('mongodb').ObjectID
+const isCpf = require('./validation').isCpf
 let db
 
 app.use(cors())
@@ -21,16 +22,11 @@ MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, (err
 // USER
 // * * * * * * * * *
 app.post('/user', (req, res) => {
-  // TODO: improve
-  const user = {
-    email: req.body.email,
-    password: req.body.password,
-    cpf: req.body.cpf,
-    cellphone: req.body.cellphone,
-    lala: req.body.lala,
-  }
+  const cpf = req.body.cpf && req.body.cpf.trim()
+  if (!cpf) return res.status(400).send('cpf not found')
+  if (!isCpf(cpf)) return res.status(400).send('cpf not valid')
 
-  db.collection('user').insertOne(user, (err, result) => {
+  db.collection('user').insertOne(req.body, (err, result) => {
     if (err) throw err
     console.log('user added succesfully', result.ops)
     res.send('user added succesfully')
