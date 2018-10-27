@@ -16,6 +16,20 @@
   </form>
 </template>
 
+<script>
+export default {
+  methods: {
+    validate() {
+      this.$validator.validate().then(result => {
+        if (result) {
+          this.$emit('submit')
+        }
+      })
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 .my-form {
   max-width: 600px;
@@ -30,17 +44,3 @@
   margin: 1.5rem 0;
 }
 </style>
-
-<script>
-export default {
-  methods: {
-    validate() {
-      this.$validator.validate().then(result => {
-        if (result) {
-          this.$emit('submit')
-        }
-      })
-    }
-  }
-}
-</script>

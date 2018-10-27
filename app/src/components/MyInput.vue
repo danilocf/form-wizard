@@ -5,7 +5,7 @@
       :for="id"
       class="my-input__label"
     >
-      <span v-if="label">{{ label }}:</span>
+      {{ label }}:
     </label>
     <input
       v-mask="mask"
@@ -16,10 +16,9 @@
       :value="value"
       :maxlength="max"
       class="my-input"
-      autocomplete="off"
       @input="$emit('change', $event.target.value)"
     >
-    <p class="my-input_error">{{ errors.first(id) }}</p>
+    <p class="my-input__error">{{ errors.first(id) }}</p>
   </div>
 </template>
 
@@ -85,7 +84,7 @@ export default {
   font-size: 1.2rem;
 }
 
-.my-input_error {
+.my-input__error {
   font-size: 1.1rem;
   color: red;
 }
