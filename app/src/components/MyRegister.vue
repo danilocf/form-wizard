@@ -7,7 +7,7 @@
         :src="formConfig.options.logoUrl"
         :alt="formConfig.options.title"
         class="my-register__logo"
-        >
+      >
       <h1 class="my-register__title">
         {{ formConfig.options.title }}
       </h1>
@@ -51,12 +51,12 @@
                 :key="item.id"
                 v-model="form[stepIndex][item.model]"
                 :id="item.id"
-                >
+              >
                 <option
                   v-for="(option, optionIndex) in item.options"
                   :value="option.value"
                   :key="optionIndex"
-                  >
+                >
                   {{ option.label }}
                 </option>
               </select>
@@ -66,7 +66,12 @@
           <span slot="submit">{{ submitText }}</span>
 
           <template v-if="submitError">
-            <div class="my-register__error" slot="error">{{ submitError }}</div>
+            <div
+              slot="error"
+              class="my-register__error"
+            >
+              {{ submitError }}
+            </div>
           </template>
 
         </my-form>
@@ -98,14 +103,14 @@ export default {
       submitError: null
     }
   },
-  created() {
-    this.generateForm()
-  },
   computed: {
     submitText() {
       if (this.activeStep+1 === this.totalSteps) return 'Finalizar'
       return 'Próximo'
     }
+  },
+  created() {
+    this.generateForm()
   },
   methods: {
     async getConfig() {

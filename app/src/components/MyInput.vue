@@ -15,9 +15,9 @@
       :name="id"
       :value="value"
       :maxlength="max"
+      :data-vv-as="label ? label.toLowerCase() : ''"
       class="my-input"
       @input="$emit('change', $event.target.value)"
-      :data-vv-as="label ? label.toLowerCase() : ''"
     >
     <p class="my-input__error">{{ errors.first(id) }}</p>
   </div>
