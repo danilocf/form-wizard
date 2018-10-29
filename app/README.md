@@ -1,4 +1,4 @@
-# my-form-wizard
+# form-wizard
 
 ## Project setup
 ```
