@@ -22,28 +22,45 @@
     <template v-else>
       <!-- STEP -->
       <div
-        v-for="(step, index) in formConfig.steps"
-        :key="index"
+        v-for="(step, stepIndex) in formConfig.steps"
+        :key="stepIndex"
       >
         <my-form
-          v-if="activeStep === index"
-          @submit="submit(index)"
+          v-if="activeStep === stepIndex"
+          @submit="submit(stepIndex)"
         >
-          <p class="my-register__step">Passo: {{ index+1 }} de {{ totalSteps }}</p>
+          <p class="my-register__step">Passo: {{ stepIndex+1 }} de {{ totalSteps }}</p>
           <h2>{{ step.name }}</h2>
 
           <!-- STEP'S ITEM -->
           <template v-for="item in step.items">
-            <my-input
-              :key="item.id"
-              v-model="form[index][item.model]"
-              :type="item.type || 'text'"
-              :id="item.id"
-              :label="item.label"
-              :max="item.max || 100"
-              :mask="item.mask || ''"
-              :rules="item.rules || ''"
-            />
+            <template v-if="item.type !== 'select'">
+              <my-input
+                :key="item.id"
+                v-model="form[stepIndex][item.model]"
+                :type="item.type || 'text'"
+                :id="item.id"
+                :label="item.label"
+                :max="item.max || 100"
+                :mask="item.mask || ''"
+                :rules="item.rules || ''"
+              />
+            </template>
+            <template v-else>
+              <select
+                :key="item.id"
+                v-model="form[stepIndex][item.model]"
+                :id="item.id"
+                >
+                <option
+                  v-for="(option, optionIndex) in item.options"
+                  :value="option.value"
+                  :key="optionIndex"
+                  >
+                  {{ option.label }}
+                </option>
+              </select>
+            </template>
           </template>
 
           <span slot="submit">{{ submitText }}</span>
@@ -101,7 +118,7 @@ export default {
 
       } catch (error) {
         console.log('error', error)
-        this.configError = 'Erro ao encontrar campos do formulário'
+        this.configError = 'Erro ao tentar encontrar os campos do formulário'
         return { steps: [], options: { title: 'Ops...' } }
       }
     },
@@ -130,13 +147,14 @@ export default {
 
       } else {
         // TODO: improve
-        const sendData = {
-          email: this.form[0].email,
-          password: this.form[0].password,
-          cpf: this.form[1].cpf,
-          cellphone: this.form[1].cellphone,
-          lala: this.form[1].lala,
-        }
+        // const sendData = {
+        //   email: this.form[0].email,
+        //   password: this.form[0].password,
+        //   cpf: this.form[1].cpf,
+        //   cellphone: this.form[1].cellphone,
+        //   lala: this.form[1].lala,
+        // }
+        const sendData = this.form
 
         try {
           const { data } = await Axios.post('http://localhost:3000/user', sendData)
@@ -144,7 +162,7 @@ export default {
 
         } catch (error) {
           console.log('error', error)
-          this.submitError = 'Erro ao salvar dados'
+          this.submitError = 'Erro ao tentar salvar os dados'
         }
       }
     }
@@ -156,7 +174,7 @@ export default {
 .my-register {
   max-width: 600px;
   margin: auto;
-  padding: 8px;
+  padding: 8px 8px 24px;
 }
 
 .my-register__header {
