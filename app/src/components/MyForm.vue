@@ -1,18 +1,20 @@
 <template>
-  <form
-    class="my-form"
-    @submit.prevent="validate"
-  >
-
+  <form @submit.prevent="validate">
     <slot/>
 
     <button
       type="submit"
       class="my-form__submit"
     >
-      Submit
+      <template v-if="$slots.submit">
+        <slot name="submit"/>
+      </template>
+      <template v-else>
+        Salvar
+      </template>
     </button>
 
+    <slot name="error"/>
   </form>
 </template>
 
@@ -31,16 +33,18 @@ export default {
 </script>
 
 <style lang="scss">
-.my-form {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
 .my-form__submit {
-  font-size: 1.4rem;
+  color: #ffffff;
+  font-size: 1.2rem;
+  background-color: #01579B;
+  border-radius: 8px;
   width: 100%;
-  background: lightgreen;
   padding: 1rem;
   margin: 1.5rem 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten(#01579B, 10%);
+  }
 }
 </style>
