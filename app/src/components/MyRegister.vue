@@ -64,6 +64,8 @@ import MyForm from '@/components/MyForm'
 import MyInput from '@/components/MyInput'
 import Axios from 'axios'
 
+import config from './config.json'
+
 export default {
   components: {
     MyForm,
@@ -105,7 +107,8 @@ export default {
     },
 
     async generateForm() {
-      this.formConfig = await this.getConfig()
+      this.formConfig = config
+      // this.formConfig = await this.getConfig()
       this.form = {}
 
       this.formConfig.steps.forEach((step, index) => {
