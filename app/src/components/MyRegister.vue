@@ -1,37 +1,60 @@
 <template>
-  <div class="container">
+  <div class="my-register">
 
-    <pre>{{ form }}</pre><hr>
-
-    <!-- STEP -->
-    <div
-      v-for="(step, index) in formConfig.steps"
-      :key="index"
-    >
-      <my-form
-        v-if="activeStep === index"
-        @submit="submit(index)"
-      >
-        <p>Step: {{ index+1 }} of {{ totalSteps }}</p>
-        <h1>{{ step.name }}</h1>
-
-        <!-- STEP'S ITEM -->
-        <template v-for="item in step.items">
-          <!-- <p>{{ item }}</p> -->
-          <my-input
-            :key="item.id"
-            v-model="form[index][item.model]"
-            :type="item.type || 'text'"
-            :id="item.id"
-            :label="item.label"
-            :max="item.max || 100"
-            :mask="item.mask || ''"
-            :rules="item.rules || ''"
-          />
-        </template>
-
-      </my-form>
+    <div class="my-register__header">
+      <img
+        v-if="formConfig.options.logoUrl"
+        :src="formConfig.options.logoUrl"
+        :alt="formConfig.options.title"
+        class="my-register__logo"
+        >
+      <h1 class="my-register__title">
+        {{ formConfig.options.title }}
+      </h1>
     </div>
+
+    <template v-if="configError">
+      <div class="my-register__error">{{ configError }}</div>
+    </template>
+    <template v-else-if="!configError && !formConfig.steps.length">
+      <p>Carregando...</p>
+    </template>
+    <template v-else>
+      <!-- STEP -->
+      <div
+        v-for="(step, index) in formConfig.steps"
+        :key="index"
+      >
+        <my-form
+          v-if="activeStep === index"
+          @submit="submit(index)"
+        >
+          <p class="my-register__step">Passo: {{ index+1 }} de {{ totalSteps }}</p>
+          <h2>{{ step.name }}</h2>
+
+          <!-- STEP'S ITEM -->
+          <template v-for="item in step.items">
+            <my-input
+              :key="item.id"
+              v-model="form[index][item.model]"
+              :type="item.type || 'text'"
+              :id="item.id"
+              :label="item.label"
+              :max="item.max || 100"
+              :mask="item.mask || ''"
+              :rules="item.rules || ''"
+            />
+          </template>
+
+          <span slot="submit">{{ submitText }}</span>
+
+          <template v-if="submitError">
+            <div class="my-register__error" slot="error">{{ submitError }}</div>
+          </template>
+
+        </my-form>
+      </div>
+    </template>
 
   </div>
 </template>
@@ -50,13 +73,20 @@ export default {
     return {
       activeStep: 0,
       totalSteps: null,
-      formConfig: {},
-      // auto filled
-      form: {}
+      formConfig: { steps: [], options: { title: 'Carregando...' } }, // filled by api
+      form: {}, // auto filled
+      configError: null,
+      submitError: null
     }
   },
   created() {
     this.generateForm()
+  },
+  computed: {
+    submitText() {
+      if (this.activeStep+1 === this.totalSteps) return 'Finalizar'
+      return 'Próximo'
+    }
   },
   methods: {
     async getConfig() {
@@ -69,7 +99,8 @@ export default {
 
       } catch (error) {
         console.log('error', error)
-        return { steps: [] }
+        this.configError = 'Erro ao encontrar campos do formulário'
+        return { steps: [], options: { title: 'Ops...' } }
       }
     },
 
@@ -110,9 +141,49 @@ export default {
 
         } catch (error) {
           console.log('error', error)
+          this.submitError = 'Erro ao salvar dados'
         }
       }
     }
   }
 }
 </script>
+
+<style lang="scss">
+.my-register {
+  max-width: 600px;
+  margin: auto;
+  padding: 8px;
+}
+
+.my-register__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (max-width: 760px) {
+    flex-direction: column;
+  }
+}
+
+.my-register__logo {
+  max-width: 100px;
+}
+
+.my-register__title {
+  text-align: center;
+}
+
+.my-register__step {
+  text-align: right;
+}
+
+.my-register__error {
+  color: #DD2C00;
+  background-color: lighten(#DD2C00, 40%);
+  border: 1.5px solid #DD2C00;
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-weight: bold;
+}
+</style>
