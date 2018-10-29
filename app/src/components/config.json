@@ -6,8 +6,14 @@
   },
   "steps": [
     {
-      "name": "Login infos",
+      "name": "Informaçōes de login",
       "items": [
+        {
+          "model": "nome",
+          "id": "nome",
+          "label": "Nome",
+          "rules": "required"
+        },
         {
           "model": "email",
           "id": "email",
@@ -16,16 +22,27 @@
           "rules": "required|email"
         },
         {
-          "model": "password",
-          "id": "password",
-          "label": "Password",
+          "model": "senha",
+          "id": "senha",
+          "label": "Senha",
           "type": "password",
           "rules": "required"
+        },
+        {
+          "model": "genero",
+          "id": "genero",
+          "label": "Gênero",
+          "type": "select",
+          "rules": "required",
+          "options": [
+            { "value": "a", "label": "aaa" },
+            { "value": "b", "label": "bbb" }
+          ]
         }
       ]
     },
     {
-      "name": "Other infos",
+      "name": "Outras",
       "items": [
         {
           "model": "cpf",
@@ -35,17 +52,11 @@
           "mask": "999.999.999-99"
         },
         {
-          "model": "cellphone",
-          "id": "cellphone",
-          "label": "Cellphone",
+          "model": "celular",
+          "id": "celular",
+          "label": "Celular",
           "rules": "required|min:14",
           "mask": "(99)99999-9999"
-        },
-        {
-          "model": "lala",
-          "id": "lala",
-          "label": "Lala",
-          "max": "20"
         }
       ]
     }
