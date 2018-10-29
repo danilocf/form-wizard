@@ -17,6 +17,7 @@
       :maxlength="max"
       class="my-input"
       @input="$emit('change', $event.target.value)"
+      :data-vv-as="label ? label.toLowerCase() : ''"
     >
     <p class="my-input__error">{{ errors.first(id) }}</p>
   </div>
@@ -76,8 +77,12 @@ export default {
   font-size: 1.2rem;
   width: 100%;
   padding: 8px;
-  margin: .2rem 0;
+  margin: .2rem 0 0;
   box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid #757575;
+  color: #424242;
 }
 
 .my-input__label {
@@ -87,5 +92,6 @@ export default {
 .my-input__error {
   font-size: 1.1rem;
   color: red;
+  margin-top: 6px;
 }
 </style>
