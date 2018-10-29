@@ -22,7 +22,9 @@ MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, (err
 // USER
 // * * * * * * * * *
 app.post('/user', (req, res) => {
-  const data = req.body.map(i => i.trim())
+  // FIXME:
+  // const data = req.body.map(i => i.trim())
+  const data = req.body.map
   const cpf = data.cpf && data.cpf.trim()
   if (!cpf) return res.status(400).send('cpf not found')
   if (!isCpf(cpf)) return res.status(400).send('cpf not valid')
@@ -63,7 +65,9 @@ app.get('/user/:id', (req, res) => {
 })
 
 app.put('/user/:id', (req, res) => {
-  const data = req.body.map(i => i.trim())
+  // FIXME:
+  // const data = req.body.map(i => i.trim())
+  const data = req.body.map
   const cpf = data.cpf && data.cpf.trim()
   if (!cpf) return res.status(400).send('cpf not found')
   if (!isCpf(cpf)) return res.status(400).send('cpf not valid')
