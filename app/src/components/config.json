@@ -35,9 +35,10 @@
           "type": "select",
           "rules": "required",
           "options": [
-            { "value": "a", "label": "aaa" },
-            { "value": "b", "label": "bbb" }
-          ]
+            { "value": "M", "label": "Masculino" },
+            { "value": "F", "label": "Feminino" }
+          ],
+          "defaultOption": "M"
         }
       ]
     },

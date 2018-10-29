@@ -138,6 +138,10 @@ export default {
         step.items.forEach(item => {
           const model = item.model
           this.$set(this.form[index], model, null)
+
+          if (item.type === 'select') {
+            this.form[index][model] = item.defaultOption
+          }
         })
       })
 
