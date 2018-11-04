@@ -31,20 +31,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.my-form__submit {
-  color: #ffffff;
-  font-size: 1.2rem;
-  background-color: #01579B;
-  border-radius: 8px;
-  width: 100%;
-  padding: 1rem;
-  margin: 1.5rem 0;
-  cursor: pointer;
-
-  &:hover {
-    background-color: lighten(#01579B, 10%);
-  }
-}
-</style>
