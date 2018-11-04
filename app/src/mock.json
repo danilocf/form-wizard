@@ -9,27 +9,23 @@
       "name": "Informaçōes de login",
       "items": [
         {
-          "model": "nome",
           "id": "nome",
           "label": "Nome",
           "rules": "required"
         },
         {
-          "model": "email",
           "id": "email",
           "label": "Email",
           "type": "email",
           "rules": "required|email"
         },
         {
-          "model": "senha",
           "id": "senha",
           "label": "Senha",
           "type": "password",
           "rules": "required"
         },
         {
-          "model": "genero",
           "id": "genero",
           "label": "Gênero",
           "type": "select",
@@ -39,6 +35,21 @@
             { "value": "F", "label": "Feminino" }
           ],
           "defaultOption": "M"
+        },
+        {
+          "id": "ensino",
+          "label": "Formaçāo",
+          "type": "select",
+          "rules": "required",
+          "options": [
+            { "value": "Fundamental incompleto", "label": "Fundamental incompleto" },
+            { "value": "Fundamental completo", "label": "Fundamental completo" },
+            { "value": "Ensino médio incompleto", "label": "Ensino médio incompleto" },
+            { "value": "Ensino médio completo", "label": "Ensino médio completo" },
+            { "value": "Ensino superior incompleto", "label": "Ensino superior incompleto" },
+            { "value": "Ensino superior complet", "label": "Ensino superior completo" }
+          ],
+          "defaultOption": ""
         }
       ]
     },
@@ -46,14 +57,12 @@
       "name": "Outras",
       "items": [
         {
-          "model": "cpf",
           "id": "cpf",
           "label": "CPF",
           "rules": "required",
           "mask": "999.999.999-99"
         },
         {
-          "model": "celular",
           "id": "celular",
           "label": "Celular",
           "rules": "required|min:14",
