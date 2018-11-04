@@ -1,43 +1,68 @@
 <template>
   <div class="my-register">
 
+    <!-- REGISTER'S HEADER -->
     <div class="my-register__header">
+      <!-- HEADER'S IMAGE -->
       <img
         v-if="formConfig.options.logoUrl"
         :src="formConfig.options.logoUrl"
         :alt="formConfig.options.title"
         class="my-register__logo"
       >
+      <!-- HEADER'S TITLE -->
       <h1 class="my-register__title">
         {{ formConfig.options.title }}
       </h1>
     </div>
 
+    <!-- ERROR IN CONFIG -->
     <template v-if="configError">
       <div class="my-register__error">{{ configError }}</div>
     </template>
+
+    <!-- CONFIG IS LOADING -->
     <template v-else-if="!configError && !formConfig.steps.length">
       <p>Carregando...</p>
     </template>
+
+    <!-- COFIG OK -->
     <template v-else>
-      <!-- STEP -->
+      <!-- REGISTER'S STEP -->
       <div
         v-for="(step, stepIndex) in formConfig.steps"
         :key="stepIndex"
       >
-        <my-form
+        <!-- STEP'S FORM -->
+        <MyForm
           v-if="activeStep === stepIndex"
           @submit="submit(stepIndex)"
-        >
+          >
+
+          <!-- SETP'S INFOS -->
           <p class="my-register__step">Passo: {{ stepIndex+1 }} de {{ totalSteps }}</p>
           <h2>{{ step.name }}</h2>
 
-          <!-- STEP'S ITEM -->
+          <!-- STEP'S ITENS -->
           <template v-for="item in step.items">
-            <template v-if="item.type !== 'select'">
-              <my-input
+
+            <!-- TYPE SELECT -->
+            <template v-if="item.type === 'select'">
+              <MySelect
                 :key="item.id"
-                v-model="form[stepIndex][item.model]"
+                v-model="form[stepIndex][item.id]"
+                :id="item.id"
+                :label="item.label"
+                :rules="item.rules || ''"
+                :options="item.options || []"
+                />
+            </template>
+
+            <!-- TYPE INPUT -->
+            <template v-else>
+              <MyInput
+                :key="item.id"
+                v-model="form[stepIndex][item.id]"
                 :type="item.type || 'text'"
                 :id="item.id"
                 :label="item.label"
@@ -46,25 +71,12 @@
                 :rules="item.rules || ''"
               />
             </template>
-            <template v-else>
-              <select
-                :key="item.id"
-                v-model="form[stepIndex][item.model]"
-                :id="item.id"
-              >
-                <option
-                  v-for="(option, optionIndex) in item.options"
-                  :value="option.value"
-                  :key="optionIndex"
-                >
-                  {{ option.label }}
-                </option>
-              </select>
-            </template>
           </template>
 
+          <!-- STEP'S SUBMIT -->
           <span slot="submit">{{ submitText }}</span>
 
+          <!-- STEP'S ERROR ALERT -->
           <template v-if="submitError">
             <div
               slot="error"
@@ -74,7 +86,7 @@
             </div>
           </template>
 
-        </my-form>
+        </MyForm>
       </div>
     </template>
 
@@ -84,14 +96,15 @@
 <script>
 import MyForm from '@/components/MyForm'
 import MyInput from '@/components/MyInput'
+import MySelect from '@/components/MySelect'
+import mock from '../mock.json'
 import Axios from 'axios'
-
-import config from './config.json'
 
 export default {
   components: {
     MyForm,
-    MyInput
+    MyInput,
+    MySelect
   },
   data() {
     return {
@@ -129,14 +142,17 @@ export default {
     },
 
     async generateForm() {
-      this.formConfig = config
       // this.formConfig = await this.getConfig()
+      this.formConfig = mock
+
       this.form = {}
 
       this.formConfig.steps.forEach((step, index) => {
         this.$set(this.form, index, {})
+
         step.items.forEach(item => {
-          const model = item.model
+          const model = item.id
+
           this.$set(this.form[index], model, null)
 
           if (item.type === 'select') {
@@ -178,42 +194,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.my-register {
-  max-width: 600px;
-  margin: auto;
-  padding: 8px 8px 24px;
-}
-
-.my-register__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media screen and (max-width: 760px) {
-    flex-direction: column;
-  }
-}
-
-.my-register__logo {
-  max-width: 100px;
-}
-
-.my-register__title {
-  text-align: center;
-}
-
-.my-register__step {
-  text-align: right;
-}
-
-.my-register__error {
-  color: #DD2C00;
-  background-color: lighten(#DD2C00, 40%);
-  border: 1.5px solid #DD2C00;
-  border-radius: 4px;
-  padding: 8px 24px;
-  font-weight: bold;
-}
-</style>
