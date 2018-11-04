@@ -35,63 +35,15 @@ export default {
     prop: 'value',
     event: 'change'
   },
-  props: {
-    value: String,
-    type: {
-      type: String,
-      required: true
-    },
-    id: {
-      type: String,
-      required: true
-    },
-    label: {
-      type: String,
-      required: false
-    },
-    error: {
-      type: Object,
-      required: false,
-      default() { return {} }
-    },
-    max: {
-      type: [String, Number],
-      required: true
-    },
-    mask: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    rules: {
-      type: String,
-      required: false,
-      default: ''
-    }
-  }
+  props: [
+    'value',
+    'type',
+    'id',
+    'label',
+    'error',
+    'max',
+    'mask',
+    'rules'
+  ]
 }
 </script>
-
-<style lang="scss">
-.my-input {
-  font-size: 1.2rem;
-  width: 100%;
-  padding: 8px;
-  margin: .2rem 0 0;
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: none;
-  border: 1px solid #757575;
-  color: #424242;
-}
-
-.my-input__label {
-  font-size: 1.2rem;
-}
-
-.my-input__error {
-  font-size: 1.1rem;
-  color: red;
-  margin-top: 6px;
-}
-</style>
