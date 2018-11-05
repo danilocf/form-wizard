@@ -36,15 +36,14 @@
         {
           "id": "genero",
           "label": "Gênero",
-          "type": "select",
+          "type": "radio",
           "rules": {
             "required": true
           },
           "options": [
             { "value": "M", "label": "Masculino" },
             { "value": "F", "label": "Feminino" }
-          ],
-          "defaultOption": "M"
+          ]
         },
         {
           "id": "formacao",
@@ -54,14 +53,11 @@
             "required": true
           },
           "options": [
-            { "value": "Fundamental incompleto", "label": "Fundamental incompleto" },
-            { "value": "Fundamental completo", "label": "Fundamental completo" },
-            { "value": "Ensino médio incompleto", "label": "Ensino médio incompleto" },
             { "value": "Ensino médio completo", "label": "Ensino médio completo" },
             { "value": "Ensino superior incompleto", "label": "Ensino superior incompleto" },
-            { "value": "Ensino superior complet", "label": "Ensino superior completo" }
+            { "value": "Ensino superior completo", "label": "Ensino superior completo" }
           ],
-          "defaultOption": ""
+          "defaultOption": "Ensino médio completo"
         }
       ]
     },

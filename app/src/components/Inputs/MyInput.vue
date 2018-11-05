@@ -7,6 +7,7 @@
     >
       {{ label }}:
     </label>
+
     <input
       v-mask="mask"
       v-validate="rules"
@@ -19,6 +20,7 @@
       class="my-input"
       @input="$emit('change', $event.target.value)"
     >
+
     <p class="my-input__error">{{ errors.first(id) }}</p>
   </div>
 </template>

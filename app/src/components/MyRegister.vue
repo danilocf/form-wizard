@@ -59,6 +59,18 @@
                 />
             </template>
 
+            <!-- TYPE RADIO -->
+            <template v-else-if="item.type === 'radio'">
+              <MyRadio
+                :key="item.id"
+                v-model="form[stepIndex][item.id]"
+                :id="item.id"
+                :label="item.label"
+                :rules="item.rules || ''"
+                :options="item.options || []"
+                />
+            </template>
+
             <!-- TYPE INPUT -->
             <template v-else>
               <MyInput
@@ -154,11 +166,12 @@ export default {
         this.$set(this.form, index, {})
 
         step.items.forEach(item => {
+          const typesWithDefaultOption = ['select', 'radio']
           const model = item.id
 
           this.$set(this.form[index], model, null)
 
-          if (item.type === 'select') {
+          if (typesWithDefaultOption.indexOf(item.type) > -1 && item.defaultOption) {
             this.form[index][model] = item.defaultOption
           }
         })
