@@ -21,7 +21,6 @@
         v-for="(option, optionIndex) in options"
         :value="option.value"
         :key="optionIndex"
-        :selected="option.value === defaultOption"
       >
         {{ option.label }}
       </option>
@@ -44,8 +43,7 @@ export default {
     'label',
     'error',
     'rules',
-    'options',
-    'defaultOption'
+    'options'
   ]
 }
 </script>
