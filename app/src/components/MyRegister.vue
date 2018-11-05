@@ -40,7 +40,18 @@
           >
 
           <!-- SETP'S INFOS -->
-          <p class="my-register__step">Passo: {{ stepIndex+1 }} de {{ totalSteps }}</p>
+          <p class="my-register__step">
+            <button
+              v-if="showGoBackButton"
+              type="button"
+              class="my_form__go-back"
+              @click.prevent="activeStep--"
+              >
+              Voltar
+            </button>
+
+            Passo: {{ stepIndex+1 }} de {{ totalSteps }}
+          </p>
           <h2>{{ step.name }}</h2>
 
           <!-- STEP'S ITENS -->
@@ -132,6 +143,9 @@ export default {
     }
   },
   computed: {
+    showGoBackButton() {
+      return this.activeStep > 0
+    },
     submitText() {
       if (this.activeStep+1 === this.totalSteps) return 'Finalizar'
       return 'Próximo'
