@@ -1,0 +1,128 @@
+{
+  "_id": "id",
+  "options": {
+    "logoUrl": "/mega.jpeg",
+    "title": "Megazord FATEC - Alistamento",
+    "successMessage": "Sucesso! Cadastro realizado."
+  },
+  "steps": [
+    {
+      "name": "Informaçōes de login",
+      "items": [
+        {
+          "id": "nome",
+          "label": "Nome",
+          "rules": {
+            "required": true,
+            "regex": "^[a-zA-Z ]+$"
+          }
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "rules": {
+            "required": true,
+            "email": true
+          }
+        },
+        {
+          "id": "senha",
+          "label": "Senha",
+          "type": "password",
+          "rules": {
+            "required": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Informações pessoais",
+      "items": [
+        {
+          "id": "genero",
+          "label": "Gênero",
+          "type": "radio",
+          "rules": {
+            "required": true
+          },
+          "options": [
+            {
+              "value": "M",
+              "label": "Masculino"
+            },
+            {
+              "value": "F",
+              "label": "Feminino"
+            }
+          ]
+        },
+        {
+          "id": "nascimento",
+          "label": "Data de nascimento",
+          "rules": {
+            "required": true,
+            "date_format": "DD/MM/YYYY"
+          },
+          "mask": "99/99/9999"
+        },
+        {
+          "id": "celular",
+          "label": "Celular",
+          "rules": {
+            "required": true,
+            "min": 14
+          },
+          "mask": "(99)99999-9999"
+        },
+        {
+          "id": "ra",
+          "label": "RA",
+          "rules": {
+            "required": true
+          },
+          "mask": "9999999999999"
+        },
+        {
+          "id": "curso",
+          "label": "Curso",
+          "type": "select",
+          "rules": {
+            "required": true
+          },
+          "options": [
+            {
+              "value": "Análise e Desenvolvimento de Sistemas",
+              "label": "Análise e Desenvolvimento de Sistemas"
+            },
+            {
+              "value": "Banco de Dados",
+              "label": "Banco de Dados"
+            },
+            {
+              "value": "Gestão da Produção Industrial",
+              "label": "Gestão da Produção Industrial"
+            },
+            {
+              "value": "Logística",
+              "label": "Logística"
+            },
+            {
+              "value": "Manufatura Avançada",
+              "label": "Manufatura Avançada"
+            },
+            {
+              "value": "Manutenção de Aeronaves",
+              "label": "Manutenção de Aeronaves"
+            },
+            {
+              "value": "Projetos de Estruturas Aeronáuticas",
+              "label": "Projetos de Estruturas Aeronáuticas"
+            }
+          ],
+          "defaultOption": "Análise e Desenvolvimento de Sistemas"
+        }
+      ]
+    }
+  ]
+}

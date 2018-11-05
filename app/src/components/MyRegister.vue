@@ -126,7 +126,8 @@ import MyForm from '@/components/Form/MyForm'
 import MyInput from '@/components/Inputs/MyInput'
 import MySelect from '@/components/Inputs/MySelect'
 import MyRadio from '@/components/Inputs/MyRadio'
-import mock from '../mock.json'
+import mock_fatec from '../mock_fatec.json'
+import mock_mega from '../mock_mega.json'
 import Axios from 'axios'
 
 export default {
@@ -180,7 +181,7 @@ export default {
 
     async generateForm() {
       // this.formConfig = await this.getConfig()
-      this.formConfig = mock
+      this.formConfig = mock_mega
 
       this.form = {}
 
