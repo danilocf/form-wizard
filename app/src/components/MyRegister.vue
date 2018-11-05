@@ -95,9 +95,10 @@
 </template>
 
 <script>
-import MyForm from '@/components/MyForm'
-import MyInput from '@/components/MyInput'
-import MySelect from '@/components/MySelect'
+import MyForm from '@/components/Form/MyForm'
+import MyInput from '@/components/Inputs/MyInput'
+import MySelect from '@/components/Inputs/MySelect'
+import MyRadio from '@/components/Inputs/MyRadio'
 import mock from '../mock.json'
 import Axios from 'axios'
 
@@ -105,7 +106,8 @@ export default {
   components: {
     MyForm,
     MyInput,
-    MySelect
+    MySelect,
+    MyRadio
   },
   data() {
     return {
