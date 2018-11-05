@@ -46,6 +46,17 @@
           ]
         },
         {
+          "id": "termo",
+          "label": "Concordo com os termos",
+          "type": "checkbox",
+          "rules": {
+            "required": true
+          },
+          "options": [
+            { "value": "concordo", "label": "" }
+          ]
+        },
+        {
           "id": "formacao",
           "label": "Formaçāo",
           "type": "select",

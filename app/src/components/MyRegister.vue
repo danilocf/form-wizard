@@ -82,6 +82,18 @@
               />
             </template>
 
+            <!-- TYPE CHECKBOX -->
+            <template v-else-if="item.type === 'checkbox'">
+              <MyCheckbox
+                :key="item.id"
+                v-model="form[stepIndex][item.id]"
+                :id="item.id"
+                :label="item.label"
+                :rules="item.rules || ''"
+                :options="item.options || []"
+              />
+            </template>
+
             <!-- TYPE INPUT -->
             <template v-else>
               <MyInput
@@ -122,6 +134,7 @@ import MyForm from '@/components/Form/MyForm'
 import MyInput from '@/components/Inputs/MyInput'
 import MySelect from '@/components/Inputs/MySelect'
 import MyRadio from '@/components/Inputs/MyRadio'
+import MyCheckbox from '@/components/Inputs/MyCheckbox'
 import mock from '../mock.json'
 import Axios from 'axios'
 
@@ -130,7 +143,8 @@ export default {
     MyForm,
     MyInput,
     MySelect,
-    MyRadio
+    MyRadio,
+    MyCheckbox
   },
   data() {
     return {
