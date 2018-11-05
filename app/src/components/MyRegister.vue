@@ -212,7 +212,7 @@ export default {
         const sendData = {}
         Object.keys(this.form).forEach(k => {
           Object.keys(this.form[k]).forEach(innerK => {
-            sendData[innerK] = this.form[k][innerK].trim()
+            sendData[innerK] = this.form[k][innerK] ? this.form[k][innerK].trim() : null
           })
         })
         console.log('send data', JSON.stringify(sendData, null, '\t'))

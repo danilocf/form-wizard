@@ -5,11 +5,9 @@
     "title": "FATEC SJC - Matrícula simples",
     "successMessage": "Sucesso! Cadastro realizado."
   },
-  "steps": [
-    {
+  "steps": [{
       "name": "Informaçōes de login",
-      "items": [
-        {
+      "items": [{
           "id": "nome",
           "label": "Nome",
           "rules": {
@@ -33,38 +31,45 @@
           "rules": {
             "required": true
           }
-        },
-        {
+        }
+      ]
+    },
+    {
+      "name": "Informações pessoais",
+      "items": [{
           "id": "genero",
           "label": "Gênero",
           "type": "radio",
           "rules": {
             "required": true
           },
-          "options": [
-            { "value": "M", "label": "Masculino" },
-            { "value": "F", "label": "Feminino" }
+          "options": [{
+              "value": "M",
+              "label": "Masculino"
+            },
+            {
+              "value": "F",
+              "label": "Feminino"
+            }
           ]
         },
         {
-          "id": "formacao",
-          "label": "Formaçāo",
-          "type": "select",
+          "id": "nascimento",
+          "label": "Data de nascimento",
+          "rules": {
+            "required": true,
+            "date_format": "DD/MM/YYYY"
+          },
+          "mask": "99/99/9999"
+        },
+        {
+          "id": "rg",
+          "label": "RG",
           "rules": {
             "required": true
           },
-          "options": [
-            { "value": "Ensino médio completo", "label": "Ensino médio completo" },
-            { "value": "Ensino superior incompleto", "label": "Ensino superior incompleto" },
-            { "value": "Ensino superior completo", "label": "Ensino superior completo" }
-          ],
-          "defaultOption": "Ensino médio completo"
-        }
-      ]
-    },
-    {
-      "name": "Outras",
-      "items": [
+          "mask": "99.999.999-9"
+        },
         {
           "id": "cpf",
           "label": "CPF",
@@ -74,6 +79,26 @@
           "mask": "999.999.999-99"
         },
         {
+          "id": "mae",
+          "label": "Nome Mãe",
+          "rules": {
+            "required": true,
+            "regex": "^[a-zA-Z ]+$"
+          }
+        },
+        {
+          "id": "pai",
+          "label": "Nome Pai (opcional)",
+          "rules": {
+            "required": false,
+            "regex": "^[a-zA-Z ]+$"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Informações residenciais",
+      "items": [{
           "id": "celular",
           "label": "Celular",
           "rules": {
@@ -81,6 +106,98 @@
             "min": 14
           },
           "mask": "(99)99999-9999"
+        },
+        {
+          "id": "cep",
+          "label": "CEP",
+          "rules": {
+            "required": true
+          },
+          "mask": "99999-999"
+        }
+      ]
+    },
+    {
+      "name": "Informações essenciais",
+      "items": [{
+          "id": "formacao",
+          "label": "Formaçāo",
+          "type": "select",
+          "rules": {
+            "required": true
+          },
+          "options": [{
+              "value": "Ensino médio completo",
+              "label": "Ensino médio completo"
+            },
+            {
+              "value": "Ensino superior incompleto",
+              "label": "Ensino superior incompleto"
+            },
+            {
+              "value": "Ensino superior completo",
+              "label": "Ensino superior completo"
+            }
+          ],
+          "defaultOption": "Ensino médio completo"
+        },
+        {
+          "id": "geral",
+          "label": "ENEM - Nota geral",
+          "type": "select",
+          "rules": {
+            "required": true
+          },
+          "options": [{
+              "value": "zero",
+              "label": "0"
+            },
+            {
+              "value": "baixo",
+              "label": "0-400"
+            },
+            {
+              "value": "media",
+              "label": "400-700"
+            },
+            {
+              "value": "alta",
+              "label": "700-900"
+            },
+            {
+              "value": "maxima",
+              "label": "1000"
+            }
+          ]
+        },
+        {
+          "id": "redacao",
+          "label": "ENEM - Nota redação",
+          "type": "select",
+          "rules": {
+            "required": true
+          },
+          "options": [{
+              "value": "zero",
+              "label": "0"
+            },
+            {
+              "value": "baixo",
+              "label": "0-400"
+            },
+            {
+              "value": "media",
+              "label": "400-700"
+            },
+            {
+              "value": "alta",
+              "label": "700-900"
+            },
+            {
+              "value": "maxima",
+              "label": "1000"
+            }
+          ]
         }
       ]
     }
