@@ -232,6 +232,9 @@ export default {
           if (error.response && error.response.status === 406) {
             this.submitError = 'CPF inválido'
 
+          } else if (error.response && error.response.status === 403) {
+            this.submitError = `Usuário de CPF ${sendData.cpf} já cadastrado`
+
           } else {
             this.submitError = 'Erro ao tentar salvar os dados'
           }
