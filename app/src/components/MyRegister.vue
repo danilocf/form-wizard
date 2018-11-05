@@ -55,6 +55,7 @@
                 :label="item.label"
                 :rules="item.rules || ''"
                 :options="item.options || []"
+                :defaultOption="item.defaultOption"
                 />
             </template>
 
