@@ -37,7 +37,7 @@
         <MyForm
           v-if="activeStep === stepIndex"
           @submit="submit(stepIndex)"
-          >
+        >
 
           <!-- SETP'S INFOS -->
           <p class="my-register__step">
@@ -46,7 +46,7 @@
               type="button"
               class="my_form__go-back"
               @click.prevent="activeStep--"
-              >
+            >
               Voltar
             </button>
 
@@ -66,8 +66,8 @@
                 :label="item.label"
                 :rules="item.rules || ''"
                 :options="item.options || []"
-                :defaultOption="item.defaultOption"
-                />
+                :default-option="item.defaultOption"
+              />
             </template>
 
             <!-- TYPE RADIO -->
@@ -79,7 +79,7 @@
                 :label="item.label"
                 :rules="item.rules || ''"
                 :options="item.options || []"
-                />
+              />
             </template>
 
             <!-- TYPE INPUT -->

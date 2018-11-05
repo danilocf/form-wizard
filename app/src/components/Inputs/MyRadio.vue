@@ -10,7 +10,7 @@
     <div
       v-for="(option, optionIndex) in options"
       :key="optionIndex"
-      >
+    >
       <input
         v-validate="rules"
         :id="option.value"
@@ -19,11 +19,11 @@
         :checked="option.value === value"
         type="radio"
         @change="$emit('change', $event.target.value)"
-      />
+      >
       <label
         :for="option.value"
         class="my-radio__label"
-        >
+      >
         {{ option.label }}
       </label>
     </div>
