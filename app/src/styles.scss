@@ -49,6 +49,16 @@ body {
   font-weight: bold;
 }
 
+.my-register__success {
+  color: #33691E;
+  background-color: lighten(#33691E, 40%);
+  border: 1.5px solid #33691E;
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-weight: bold;
+  margin-top: 16px;
+}
+
 // * * * * * * * * * * * * * * *
 // * FORM
 // * * * * * * * * * * * * * * *
