@@ -11,25 +11,35 @@
         {
           "id": "nome",
           "label": "Nome",
-          "rules": "required"
+          "rules": {
+            "required": true,
+            "regex": "^[a-zA-Z ]+$"
+          }
         },
         {
           "id": "email",
           "label": "Email",
           "type": "email",
-          "rules": "required|email"
+          "rules": {
+            "required": true,
+            "email": true
+          }
         },
         {
           "id": "senha",
           "label": "Senha",
           "type": "password",
-          "rules": "required"
+          "rules": {
+            "required": true
+          }
         },
         {
           "id": "genero",
           "label": "Gênero",
           "type": "select",
-          "rules": "required",
+          "rules": {
+            "required": true
+          },
           "options": [
             { "value": "M", "label": "Masculino" },
             { "value": "F", "label": "Feminino" }
@@ -37,10 +47,12 @@
           "defaultOption": "M"
         },
         {
-          "id": "ensino",
+          "id": "formacao",
           "label": "Formaçāo",
           "type": "select",
-          "rules": "required",
+          "rules": {
+            "required": true
+          },
           "options": [
             { "value": "Fundamental incompleto", "label": "Fundamental incompleto" },
             { "value": "Fundamental completo", "label": "Fundamental completo" },
@@ -59,13 +71,18 @@
         {
           "id": "cpf",
           "label": "CPF",
-          "rules": "required",
+          "rules": {
+            "required": true
+          },
           "mask": "999.999.999-99"
         },
         {
           "id": "celular",
           "label": "Celular",
-          "rules": "required|min:14",
+          "rules": {
+            "required": true,
+            "min": 14
+          },
           "mask": "(99)99999-9999"
         }
       ]
