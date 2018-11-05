@@ -34,13 +34,15 @@ app.get('/config', (req, res) => {
 // * * * * * * * * * * * * * * *
 // * USER
 // * * * * * * * * * * * * * * *
-app.post('/user', (req, res) => {
+app.post('/register', (req, res) => {
   const data = req.body
+  const project = data.project
   const cpf = data.cpf && data.cpf.trim()
+  if (!project) return res.status(402).send('project name not found')
   if (!cpf) return res.status(402).send('cpf not found')
   if (!isCpf(cpf)) return res.status(406).send('cpf not valid')
 
-  db.collection('user').find({ cpf }).toArray((err, result) => {
+  db.collection(project).find({ cpf }).toArray((err, result) => {
     if (err) {
       console.log('err find cpf', err)
       return res.status(500)
@@ -48,73 +50,82 @@ app.post('/user', (req, res) => {
     console.log('find cpf', JSON.stringify(result))
 
     if (result.length) {
-      res.status(403).send('user already registered')
+      res.status(403).send('register already registered')
 
     } else {
-      db.collection('user').insertOne(data, (err, result) => {
+      db.collection(project).insertOne(data, (err, result) => {
         if (err) {
-          console.log('err post user', err)
+          console.log('err post register', err)
           return res.status(500)
         }
-        console.log('user added succesfully', result.ops)
-        res.send('user added succesfully')
+        console.log('register added succesfully', result.ops)
+        res.send('register added succesfully')
       })
     }
 
   })
 })
 
-app.get('/user', (req, res) => {
-  db.collection('user').find({}).toArray((err, result) => {
-    if (err) {
-      console.log('err get users', err)
-      return res.status(500)
-    }
-    console.log('user', JSON.stringify(result))
-    res.send(result)
-  })
-})
+// FIXME: project name
+// app.get('/register', (req, res) => {
+//   const data = req.body
+//   const project = data.project
 
-app.get('/user/:id', (req, res) => {
-  const id = req.params.id
-  const query = { '_id': ObjectID(id) }
+//   db.collection(project).find({}).toArray((err, result) => {
+//     if (err) {
+//       console.log('err get registers', err)
+//       return res.status(500)
+//     }
+//     console.log('register', JSON.stringify(result))
+//     res.send(result)
+//   })
+// })
 
-  db.collection('user').find(query).toArray((err, result) => {
-    if (err) {
-      console.log('err find user by id', err)
-      return res.status(500)
-    }
-    console.log('user', JSON.stringify(result))
-    res.send(result)
-  })
-})
+// app.get('/register/:id', (req, res) => {
+//   const data = req.body
+//   const project = data.project
+//   const id = req.params.id
+//   const query = { '_id': ObjectID(id) }
 
-app.put('/user/:id', (req, res) => {
-  const data = req.body
-  const cpf = data.cpf && data.cpf.trim()
-  if (!cpf) return res.status(402).send('cpf not found')
-  if (!isCpf(cpf)) return res.status(400).send('cpf not valid')
-  const id = ObjectID(req.params.id)
+//   db.collection(project).find(query).toArray((err, result) => {
+//     if (err) {
+//       console.log('err find register by id', err)
+//       return res.status(500)
+//     }
+//     console.log('register', JSON.stringify(result))
+//     res.send(result)
+//   })
+// })
 
-  db.collection('user').updateOne({ '_id': id }, { '$set': data }, (err, result) => {
-    if (err) {
-      console.log('err put user', err)
-      return res.status(500)
-    }
-    console.log('user updated succesfully')
-    res.send('user updated succesfully')
-  })
-})
+// app.put('/register/:id', (req, res) => {
+//   const data = req.body
+//   const project = data.project
+//   const cpf = data.cpf && data.cpf.trim()
+//   if (!cpf) return res.status(402).send('cpf not found')
+//   if (!isCpf(cpf)) return res.status(400).send('cpf not valid')
+//   const id = ObjectID(req.params.id)
 
-app.delete('/user/:id', (req, res) => {
-  const id = ObjectID(req.params.id)
+//   db.collection(project).updateOne({ '_id': id }, { '$set': data }, (err, result) => {
+//     if (err) {
+//       console.log('err put register', err)
+//       return res.status(500)
+//     }
+//     console.log('register updated succesfully')
+//     res.send('register updated succesfully')
+//   })
+// })
 
-  db.collection('user').deleteOne({ '_id': id }, (err, result) => {
-    if (err) {
-      console.log('err delete user', err)
-      return res.status(500)
-    }
-    console.log('user deleted succesfully')
-    res.send('user deleted succesfully')
-  })
-})
+// app.delete('/register/:id', (req, res) => {
+//   const data = req.body
+//   const project = data.project
+//   const id = ObjectID(req.params.id)
+
+//   db.collection(project).deleteOne({ '_id': id }, (err, result) => {
+//     if (err) {
+//       console.log('err delete register', err)
+//       return res.status(500)
+//     }
+//     console.log('register deleted succesfully')
+//     res.send('register deleted succesfully')
+//   })
+// })

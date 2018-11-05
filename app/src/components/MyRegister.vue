@@ -181,7 +181,7 @@ export default {
 
     async generateForm() {
       // this.formConfig = await this.getConfig()
-      this.formConfig = mock_mega
+      this.formConfig = mock_fatec
 
       this.form = {}
 
@@ -216,13 +216,14 @@ export default {
             sendData[innerK] = this.form[k][innerK] ? this.form[k][innerK].trim() : null
           })
         })
+        sendData.project = this.formConfig.options.project
         console.log('send data', JSON.stringify(sendData, null, '\t'))
 
         this.submitError = ''
         this.submitLoading = true
 
         try {
-          const { data } = await Axios.post('http://localhost:3000/user', sendData)
+          const { data } = await Axios.post('http://localhost:3000/register', sendData)
           console.log('data', JSON.stringify(data))
 
           this.submitFinished = true

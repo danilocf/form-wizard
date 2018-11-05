@@ -1,6 +1,7 @@
 {
   "_id": "id",
   "options": {
+    "project": "fatec",
     "logoUrl": "/fatec.jpeg",
     "title": "FATEC SJC - Matrícula simples",
     "successMessage": "Sucesso! Cadastro realizado."
