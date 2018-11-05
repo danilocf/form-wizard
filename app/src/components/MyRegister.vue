@@ -26,6 +26,11 @@
       <p>Carregando...</p>
     </template>
 
+    <!-- SUBMIT FINISHED -->
+    <template v-else-if="submitFinished && formConfig.options.successMessage">
+      <div class="my-register__success">{{ formConfig.options.successMessage }}</div>
+    </template>
+
     <!-- COFIG OK -->
     <template v-else>
       <!-- REGISTER'S STEP -->
@@ -66,7 +71,6 @@
                 :label="item.label"
                 :rules="item.rules || ''"
                 :options="item.options || []"
-                :default-option="item.defaultOption"
               />
             </template>
 
@@ -98,7 +102,7 @@
           </template>
 
           <!-- STEP'S SUBMIT -->
-          <span slot="submit">{{ submitText }}</span>
+          <span slot="submit">{{ submitLoading ? 'Carregando...' : submitText }}</span>
 
           <!-- STEP'S ERROR ALERT -->
           <template v-if="submitError">
@@ -139,7 +143,9 @@ export default {
       formConfig: { steps: [], options: { title: 'Carregando...' } }, // filled by api
       form: {}, // auto filled
       configError: null,
-      submitError: null
+      submitError: null,
+      submitLoading: false,
+      submitFinished: false
     }
   },
   computed: {
@@ -158,7 +164,8 @@ export default {
     async getConfig() {
       try {
         const { data } = await Axios.get('http://localhost:3000/config')
-        console.log('data', JSON.stringify(data))
+        console.log('data', JSON.stringify(data, null, '\t'))
+
         if (data && data.length) {
           return data[0]
         }
@@ -166,6 +173,7 @@ export default {
       } catch (error) {
         console.log('error', error)
         this.configError = 'Erro ao tentar encontrar os campos do formulário'
+
         return { steps: [], options: { title: 'Ops...' } }
       }
     },
@@ -195,29 +203,41 @@ export default {
     },
 
     async submit(index) {
-      console.log(JSON.stringify(this.form[index], null, '\t'))
+      console.log(`step ${index}`, JSON.stringify(this.form[index], null, '\t'))
 
       if (index+1 < this.totalSteps) {
         this.activeStep = index+1
 
       } else {
-        // TODO: improve
-        // const sendData = {
-        //   email: this.form[0].email,
-        //   password: this.form[0].password,
-        //   cpf: this.form[1].cpf,
-        //   cellphone: this.form[1].cellphone,
-        //   lala: this.form[1].lala,
-        // }
-        const sendData = this.form
+        const sendData = {}
+        Object.keys(this.form).forEach(k => {
+          Object.keys(this.form[k]).forEach(innerK => {
+            sendData[innerK] = this.form[k][innerK].trim()
+          })
+        })
+        console.log('send data', JSON.stringify(sendData, null, '\t'))
+
+        this.submitError = ''
+        this.submitLoading = true
 
         try {
           const { data } = await Axios.post('http://localhost:3000/user', sendData)
           console.log('data', JSON.stringify(data))
 
+          this.submitFinished = true
+
         } catch (error) {
           console.log('error', error)
-          this.submitError = 'Erro ao tentar salvar os dados'
+
+          if (error.response && error.response.status === 406) {
+            this.submitError = 'CPF inválido'
+
+          } else {
+            this.submitError = 'Erro ao tentar salvar os dados'
+          }
+
+        } finally {
+          this.submitLoading = false
         }
       }
     }
