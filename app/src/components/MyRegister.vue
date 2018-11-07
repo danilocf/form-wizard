@@ -28,7 +28,12 @@
 
     <!-- SUBMIT FINISHED -->
     <template v-else-if="submitFinished && formConfig.options.successMessage">
-      <div class="my-register__success">{{ formConfig.options.successMessage }}</div>
+      <div
+        class="my-register__success"
+        @click.prevent="reset"
+        >
+        {{ formConfig.options.successMessage }}
+      </div>
     </template>
 
     <!-- COFIG OK -->
@@ -245,6 +250,18 @@ export default {
           this.submitLoading = false
         }
       }
+    },
+
+    reset() {
+      this.activeStep = 0,
+      this.totalSteps = null,
+      this.formConfig = { steps: [], options: { title: 'Carregando...' } },
+      this.form = {},
+      this.configError = null,
+      this.submitError = null,
+      this.submitLoading = false,
+      this.submitFinished = false
+      this.generateForm()
     }
   }
 }
