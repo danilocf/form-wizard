@@ -6,11 +6,9 @@
     "title": "Megazord FATEC - Alistamento",
     "successMessage": "Sucesso! Cadastro realizado."
   },
-  "steps": [
-    {
+  "steps": [{
       "name": "Informaçōes de login",
-      "items": [
-        {
+      "items": [{
           "id": "nome",
           "label": "Nome",
           "rules": {
@@ -39,16 +37,14 @@
     },
     {
       "name": "Informações pessoais",
-      "items": [
-        {
+      "items": [{
           "id": "genero",
           "label": "Gênero",
           "type": "radio",
           "rules": {
             "required": true
           },
-          "options": [
-            {
+          "options": [{
               "value": "M",
               "label": "Masculino"
             },
@@ -91,16 +87,19 @@
             "min": 14
           },
           "mask": "(99)99999-9999"
-        },
-        {
+        }
+      ]
+    },
+    {
+      "name": "Informações escolares",
+      "items": [{
           "id": "curso",
           "label": "Curso",
           "type": "select",
           "rules": {
             "required": true
           },
-          "options": [
-            {
+          "options": [{
               "value": "Análise e Desenvolvimento de Sistemas",
               "label": "Análise e Desenvolvimento de Sistemas"
             },
@@ -130,6 +129,44 @@
             }
           ],
           "defaultOption": "Análise e Desenvolvimento de Sistemas"
+        },
+        {
+          "id": "semestre",
+          "label": "Semestre atual",
+          "type": "select",
+          "rules": {
+            "required": true
+          },
+          "options": [{
+              "value": "1º Semestre",
+              "label": "1º Semestre"
+            },
+            {
+              "value": "2º Semestre",
+              "label": "2º Semestre"
+            },
+            {
+              "value": "3º Semestre",
+              "label": "3º Semestre"
+            },
+            {
+              "value": "4º Semestre",
+              "label": "4º Semestre"
+            },
+            {
+              "value": "5º Semestre",
+              "label": "5º Semestre"
+            },
+            {
+              "value": "6º Semestre",
+              "label": "6º Semestre"
+            },
+            {
+              "value": "dps",
+              "label": "DPs (6º Semestre +)"
+            }
+          ],
+          "defaultOption": "1º Semestre"
         }
       ]
     }

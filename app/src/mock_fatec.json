@@ -55,15 +55,6 @@
           ]
         },
         {
-          "id": "nascimento",
-          "label": "Data de nascimento",
-          "rules": {
-            "required": true,
-            "date_format": "DD/MM/YYYY"
-          },
-          "mask": "99/99/9999"
-        },
-        {
           "id": "rg",
           "label": "RG",
           "rules": {
@@ -78,6 +69,15 @@
             "required": true
           },
           "mask": "999.999.999-99"
+        },
+        {
+          "id": "nascimento",
+          "label": "Data de nascimento",
+          "rules": {
+            "required": true,
+            "date_format": "DD/MM/YYYY"
+          },
+          "mask": "99/99/9999"
         },
         {
           "id": "mae",
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "name": "Informações residenciais",
+      "name": "Informações de contato",
       "items": [{
           "id": "celular",
           "label": "Celular",
@@ -115,11 +115,19 @@
             "required": true
           },
           "mask": "99999-999"
+        },
+        {
+          "id": "numero",
+          "label": "Número",
+          "rules": {
+            "required": true,
+            "numeric": true
+          }
         }
       ]
     },
     {
-      "name": "Informações essenciais",
+      "name": "Informações escolares",
       "items": [{
           "id": "formacao",
           "label": "Formaçāo",
@@ -141,6 +149,13 @@
             }
           ],
           "defaultOption": "Ensino médio completo"
+        },
+        {
+          "id": "escola",
+          "label": "Escola ensino médio",
+          "rules": {
+            "required": true
+          }
         },
         {
           "id": "geral",
