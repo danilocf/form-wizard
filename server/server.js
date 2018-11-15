@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, (err, client) => {
   if (err) throw err
   db = client.db('tg')
-  app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+  app.listen(port, () => console.log(`Server listening on port ${port}!`))
 })
 
 // * * * * * * * * * * * * * * *
