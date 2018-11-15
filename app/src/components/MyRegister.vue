@@ -31,7 +31,7 @@
       <div
         class="my-register__success"
         @click.prevent="reset"
-        >
+      >
         {{ formConfig.options.successMessage }}
       </div>
     </template>
@@ -132,7 +132,7 @@ import MyInput from '@/components/Inputs/MyInput'
 import MySelect from '@/components/Inputs/MySelect'
 import MyRadio from '@/components/Inputs/MyRadio'
 import mock_fatec from '../mock_fatec.json'
-import mock_mega from '../mock_mega.json'
+// import mock_mega from '../mock_mega.json'
 import Axios from 'axios'
 
 export default {

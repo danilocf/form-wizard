@@ -25,7 +25,8 @@ module.exports = {
       "startTag": "never",
       "endTag": "never",
       "selfClosingTag": "never"
-    }]
+    }],
+    'vue/require-prop-types': 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'
