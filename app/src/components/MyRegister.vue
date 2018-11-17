@@ -1,32 +1,32 @@
 <template>
   <div class="my-register">
 
-    <!-- REGISTER'S HEADER -->
+    <!-- CABECALHO -->
     <div class="my-register__header">
-      <!-- HEADER'S IMAGE -->
+      <!-- LOGO -->
       <img
         v-if="formConfig.options.logoUrl"
         :src="formConfig.options.logoUrl"
         :alt="formConfig.options.title"
         class="my-register__logo"
       >
-      <!-- HEADER'S TITLE -->
+      <!-- TITULO -->
       <h1 class="my-register__title">
         {{ formConfig.options.title }}
       </h1>
     </div>
 
-    <!-- ERROR IN CONFIG -->
+    <!-- ALERTA: ERRO AO BUSCAR CONFIGURACAO -->
     <template v-if="configError">
       <div class="my-register__error">{{ configError }}</div>
     </template>
 
-    <!-- CONFIG IS LOADING -->
+    <!-- ALERTA: CARREGANDO CONFIGURACAO -->
     <template v-else-if="!configError && !formConfig.steps.length">
       <p>Carregando...</p>
     </template>
 
-    <!-- SUBMIT FINISHED -->
+    <!-- ALERTA: FORMULARIO FINALIZADO -->
     <template v-else-if="submitFinished && formConfig.options.successMessage">
       <div
         class="my-register__success"
@@ -36,38 +36,41 @@
       </div>
     </template>
 
-    <!-- COFIG OK -->
+    <!-- CORPO -->
     <template v-else>
-      <!-- REGISTER'S STEP -->
+      <!-- PASSOS -->
       <div
         v-for="(step, stepIndex) in formConfig.steps"
         :key="stepIndex"
-      >
-        <!-- STEP'S FORM -->
+        >
+        <!-- PASSO ATUAL -->
         <MyForm
           v-if="activeStep === stepIndex"
           @submit="submit(stepIndex)"
-        >
+          >
 
-          <!-- SETP'S INFOS -->
+          <!-- INFORMACOES DO PASSO -->
           <p class="my-register__step">
+            <!-- BOTAO VOLTAR -->
             <button
               v-if="showGoBackButton"
               type="button"
               class="my_form__go-back"
               @click.prevent="activeStep--"
-            >
+              >
               Voltar
             </button>
 
             Passo: {{ stepIndex+1 }} de {{ totalSteps }}
           </p>
+
+          <!-- TITULO DO PASSO -->
           <h2>{{ step.name }}</h2>
 
-          <!-- STEP'S ITENS -->
+          <!-- CAMPOS -->
           <template v-for="item in step.items">
 
-            <!-- TYPE SELECT -->
+            <!-- SELECT -->
             <template v-if="item.type === 'select'">
               <MySelect
                 :key="item.id"
@@ -79,7 +82,7 @@
               />
             </template>
 
-            <!-- TYPE RADIO -->
+            <!-- RADIO -->
             <template v-else-if="item.type === 'radio'">
               <MyRadio
                 :key="item.id"
@@ -91,7 +94,7 @@
               />
             </template>
 
-            <!-- TYPE INPUT -->
+            <!-- INPUT -->
             <template v-else>
               <MyInput
                 :key="item.id"
@@ -104,17 +107,20 @@
                 :rules="item.rules || ''"
               />
             </template>
+
           </template>
 
-          <!-- STEP'S SUBMIT -->
-          <span slot="submit">{{ submitLoading ? 'Carregando...' : submitText }}</span>
+          <!-- MENSAGEM DO BOTAO DE SUBMISSAO -->
+          <span slot="submit">
+            {{ submitLoading ? 'Carregando...' : submitText }}
+          </span>
 
-          <!-- STEP'S ERROR ALERT -->
+          <!-- ALERTA - ERRO SUBMISSAO -->
           <template v-if="submitError">
             <div
               slot="error"
               class="my-register__error"
-            >
+              >
               {{ submitError }}
             </div>
           </template>
@@ -132,7 +138,6 @@ import MyInput from '@/components/Inputs/MyInput'
 import MySelect from '@/components/Inputs/MySelect'
 import MyRadio from '@/components/Inputs/MyRadio'
 import mock_fatec from '../mock_fatec.json'
-// import mock_mega from '../mock_mega.json'
 import Axios from 'axios'
 
 export default {
@@ -185,9 +190,7 @@ export default {
     },
 
     async generateForm() {
-      // this.formConfig = await this.getConfig()
-      this.formConfig = mock_fatec
-
+      this.formConfig = await this.getConfig()
       this.form = {}
 
       this.formConfig.steps.forEach((step, index) => {
