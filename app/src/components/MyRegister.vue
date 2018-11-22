@@ -42,12 +42,12 @@
       <div
         v-for="(step, stepIndex) in formConfig.steps"
         :key="stepIndex"
-        >
+      >
         <!-- PASSO ATUAL -->
         <MyForm
           v-if="activeStep === stepIndex"
           @submit="submit(stepIndex)"
-          >
+        >
 
           <!-- INFORMACOES DO PASSO -->
           <p class="my-register__step">
@@ -57,7 +57,7 @@
               type="button"
               class="my_form__go-back"
               @click.prevent="activeStep--"
-              >
+            >
               Voltar
             </button>
 
@@ -120,7 +120,7 @@
             <div
               slot="error"
               class="my-register__error"
-              >
+            >
               {{ submitError }}
             </div>
           </template>
@@ -137,7 +137,7 @@ import MyForm from '@/components/Form/MyForm'
 import MyInput from '@/components/Inputs/MyInput'
 import MySelect from '@/components/Inputs/MySelect'
 import MyRadio from '@/components/Inputs/MyRadio'
-import mock_fatec from '../mock_fatec.json'
+import mock_mega from '../mock_mega.json'
 import Axios from 'axios'
 
 export default {
@@ -169,6 +169,7 @@ export default {
     }
   },
   created() {
+    this.formConfig = await this.getConfig()
     this.generateForm()
   },
   methods: {
@@ -190,7 +191,6 @@ export default {
     },
 
     async generateForm() {
-      this.formConfig = await this.getConfig()
       this.form = {}
 
       this.formConfig.steps.forEach((step, index) => {
