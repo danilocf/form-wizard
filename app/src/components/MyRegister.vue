@@ -133,12 +133,12 @@
 </template>
 
 <script>
+import Axios from 'axios'
 import MyForm from '@/components/Form/MyForm'
 import MyInput from '@/components/Inputs/MyInput'
 import MySelect from '@/components/Inputs/MySelect'
 import MyRadio from '@/components/Inputs/MyRadio'
-import mock_mega from '../mock_mega.json'
-import Axios from 'axios'
+// import mock_mega from '../mock_mega.json'
 
 export default {
   components: {
@@ -168,7 +168,7 @@ export default {
       return 'Próximo'
     }
   },
-  created() {
+  async created() {
     this.formConfig = await this.getConfig()
     this.generateForm()
   },
